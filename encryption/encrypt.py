@@ -14,11 +14,15 @@ def encrypt(text: str, key: int) -> str:
     for character in text:
         # Check if a character is an alphabetic character
         if character.isalpha():
-            # 
+            # Ascii code of the character, then subtract 97, or the ascii code of a (first character of the alphabet)
             ascii_code=ord(character) - ord('a')
+            # Add to the ascii code the value of the key
             ascii_code += key
+            # Returns to the beginning of the alphabet once the ascii code has passed the value of 26 i.e. the letter "z".
             ascii_code = ascii_code % 26
+            # Re-add the ascii value of "a"
             ascii_code += ord('a')
+            # Add the value of ascii_code to the output
             output += chr(ascii_code)
         else:
             output+=character
@@ -29,16 +33,17 @@ def encrypt(text: str, key: int) -> str:
 
 def _main():
     load_dotenv()
-    # read your secret encryption key from the .env file
+    # Read your secret encryption key from the .env file
     k = os.getenv("CIPHER_KEY")
+    # Cast k to int
     k = int(k)
-    # read from encrypt_input.txt
+    # Read from encrypt_input.txt
     with open("./encryption/encrypt_input.txt") as input:
         with open("./encryption/encrypt_output.txt", "w") as output:
             for line in input.readlines():
-                # call encrypt on each line with your key
+                # Call encrypt on each line with your key
                 encrypted_line = encrypt(line, k)
-                # write the encrypted lines to encrypt_output.txtc
+                # Write the encrypted lines to encrypt_output.txtc
                 output.write(encrypted_line)
                 
 if __name__ == "__main__":
