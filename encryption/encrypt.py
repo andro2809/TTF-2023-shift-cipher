@@ -8,25 +8,38 @@ def encrypt(text: str, key: int) -> str:
     by rotating it LEFT of key number of positions.
     Returns the rotated text.
     """
+    # Inizialized empty final variable for output
+    output = ""
+    # Iterate for every character in the line
     for character in text:
-        chr(ord(character) - key)
+        # Check if a character is an alphabetic character
+        if character.isalpha():
+            # 
+            ascii_code=ord(character) - ord('a')
+            ascii_code += key
+            ascii_code = ascii_code % 26
+            ascii_code += ord('a')
+            output += chr(ascii_code)
+        else:
+            output+=character
+    return output
+        
 
+    
 
 def _main():
     load_dotenv()
     # read your secret encryption key from the .env file
     k = os.getenv("CIPHER_KEY")
-    print(type(k))
+    k = int(k)
     # read from encrypt_input.txt
     with open("./encryption/encrypt_input.txt") as input:
-        print(input.readlines())
-    # call encrypt on each line with your key
-    
-    # write the encrypted lines to encrypt_output.txtc
-    with open("./encryption/encrypt_output.txt", "w") as output:
-        output.write("TEST")
-   
-
-
+        with open("./encryption/encrypt_output.txt", "w") as output:
+            for line in input.readlines():
+                # call encrypt on each line with your key
+                encrypted_line = encrypt(line, k)
+                # write the encrypted lines to encrypt_output.txtc
+                output.write(encrypted_line)
+                
 if __name__ == "__main__":
     _main()
