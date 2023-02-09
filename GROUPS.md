@@ -8,6 +8,7 @@ Mathias Carrera - full01n
 Giovanni Gavioli - Gilibenzio
 Gianmarco Azori - ishek01
 Andro Ibrahim - andro2809
+Matteo Gelvi - G3LvYx02
 
 # Gruppo 2
 
